@@ -1,0 +1,23 @@
+{
+  "name": "markdown-code-extractor",
+  "version": "1.0.0",
+  "description": "Extracts code blocks in markdown to the relative path link given right above",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run jshint",
+    "jshint": "jshint index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chad-autry/markdown-code-extractor.git"
+  },
+  "author": "Chad Autry",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chad-autry/markdown-code-extractor/issues"
+  },
+  "homepage": "https://github.com/chad-autry/markdown-code-extractor#readme",
+  "devDependencies": {
+    "jshint": "^2.9.2"
+  }
+}
