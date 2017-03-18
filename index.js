@@ -12,7 +12,7 @@ var hasFile = false;
 var parsingCode = false;
 var writeStream;
 var lineNumber = 0;
-var linkMatcher = new RegExp("^\[.*]\(.*\)$");
+var linkMatcher = new RegExp("^\\[.*\\]\\(.*\\)$");
 var codeDelimiterMatcher = new RegExp("^```");
 lineReader.on('line', function (line) {
     lineNumber++;
