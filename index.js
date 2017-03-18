@@ -12,10 +12,12 @@ var hasFile = false;
 var parsingCode = false;
 var writeStream;
 var lineNumber = 0;
+var linkMatcher = new RegExp("^\[.*]\(.*\)$");
+var codeDelimiterMatcher = new RegExp("^```");
 lineReader.on('line', function (line) {
     lineNumber++;
     //When testing, my match didn't work if I pegged it to the begging of line
-    if (!hasFile && !!line.match("\[.*]\(.*\)$")) {
+    if (!hasFile && linkMatcher.test(line)) {
          console.log("Link detected. Line Number: " + lineNumber + " Line: " + line);
         //Assume any link right before a code block is a relative path
         hasFile = true;
@@ -25,7 +27,7 @@ lineReader.on('line', function (line) {
         filePath = filePath.slice(0, filePath.length - 1);
     } else if (hasFile && !parsingCode) {
         //Check if we have a code block right after the link
-        if (!!line.match("^```")) {
+        if (codeDelimiterMatcher.test(line)) {
             console.log("Code block matched after link detection. Line Number: " + lineNumber);
             //We did start a code block, assume we can create a file for the linked path
             //Any folders must be pre-created or you'll get an error
@@ -37,7 +39,7 @@ lineReader.on('line', function (line) {
             //Start looking for a link again
             hasFile = false;
         }
-    } else if (parsingCode && !!line.match("^```")) {
+    } else if (parsingCode && codeDelimiterMatcher.test(line)) {
         console.log("Code block terminated. Line Number: " + lineNumber);
         //we've hit the end of the code block
         //Start looking for a link
