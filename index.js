@@ -35,8 +35,11 @@ lineReader.on('line', function (line) {
             console.log("Code block matched after link detection. Line Number: " + lineNumber);
             //We did start a code block,
             mkdirp(process.cwd() +'/'+ parentPath, function (err) {
-                if (err) console.error(err)
-                else console.log('dir created')
+                if (err) {
+                    console.error(err);
+                } else {
+                    console.log('dir created');
+                }
             });
             writeStream = fs.createWriteStream(process.cwd() +'/'+ filePath);
             parsingCode = true;
