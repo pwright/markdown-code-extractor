@@ -32,13 +32,7 @@ lineReader.on('line', function (line) {
         if (codeDelimiterMatcher.test(line)) {
             console.log("Code block matched after link detection. Line Number: " + lineNumber);
             //We did start a code block,
-            mkdirp(process.cwd() +'/'+ path.dirname(filePath), function (err) {
-                if (err) {
-                    console.error(err);
-                } else {
-                    console.log('dir:'+process.cwd() +'/'+ path.dirname(filePath));
-                }
-            });
+            mkdirp.sync(process.cwd() +'/'+ path.dirname(filePath));
             writeStream = fs.createWriteStream(process.cwd() +'/'+ filePath);
             parsingCode = true;
         } else {
