@@ -8,6 +8,7 @@ var lineReader = require('readline').createInterface({
 
 var firstLine = true;
 var filePath = '';
+var parentPath = '';
 var hasFile = false;
 var parsingCode = false;
 var writeStream;
@@ -25,12 +26,14 @@ lineReader.on('line', function (line) {
         var tempArray = line.split("(");
         filePath = tempArray[tempArray.length - 1];
         filePath = filePath.slice(0, filePath.length - 1);
+        tempArray = line.split("/");
+        parentPath = tempArray[0];
     } else if (hasFile && !parsingCode) {
         //Check if we have a code block right after the link
         if (codeDelimiterMatcher.test(line)) {
             console.log("Code block matched after link detection. Line Number: " + lineNumber);
-            //We did start a code block, assume we can create a file for the linked path
-            //Any folders must be pre-created or you'll get an error
+            //We did start a code block,
+            fs.mkdirSync(process.cwd() +'/'+ parentPath);
             writeStream = fs.createWriteStream(process.cwd() +'/'+ filePath);
             parsingCode = true;
         } else {
