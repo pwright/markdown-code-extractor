@@ -38,7 +38,7 @@ lineReader.on('line', function (line) {
                 if (err) {
                     console.error(err);
                 } else {
-                    console.log('dir created');
+                    console.log('dir:'+process.cwd() +'/'+ parentPath);
                 }
             });
             writeStream = fs.createWriteStream(process.cwd() +'/'+ filePath);
