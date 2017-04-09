@@ -27,7 +27,7 @@ lineReader.on('line', function (line) {
         var tempArray = line.split("(");
         filePath = tempArray[tempArray.length - 1];
         filePath = filePath.slice(0, filePath.length - 1);
-        tempArray = line.split("/");
+        tempArray = filePath.split("/");
         parentPath = tempArray[0];
     } else if (hasFile && !parsingCode) {
         //Check if we have a code block right after the link
