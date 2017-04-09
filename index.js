@@ -1,4 +1,5 @@
 var fs = require('fs');
+var mkdirp  = require('mkdirp');
 
 process.stdin.setEncoding('utf8');
 
@@ -33,7 +34,10 @@ lineReader.on('line', function (line) {
         if (codeDelimiterMatcher.test(line)) {
             console.log("Code block matched after link detection. Line Number: " + lineNumber);
             //We did start a code block,
-            fs.mkdirSync(process.cwd() +'/'+ parentPath);
+            mkdirp(process.cwd() +'/'+ parentPath, function (err) {
+                if (err) console.error(err)
+                else console.log('dir created')
+            });
             writeStream = fs.createWriteStream(process.cwd() +'/'+ filePath);
             parsingCode = true;
         } else {

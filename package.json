@@ -20,5 +20,8 @@
   "homepage": "https://github.com/chad-autry/markdown-code-extractor#readme",
   "devDependencies": {
     "jshint": "^2.9.2"
+  },
+  "dependencies": {
+    "mkdirp": "^0.5.1"
   }
 }
