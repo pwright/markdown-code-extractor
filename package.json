@@ -1,5 +1,5 @@
 {
-  "name": "markdown-code-extractor",
+  "name": "markdown-code-extractor-didact",
   "version": "1.4.0",
   "description": "Extracts code blocks in markdown to the relative path link given right above",
   "main": "index.js",

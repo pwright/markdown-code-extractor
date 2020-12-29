@@ -14,36 +14,50 @@ var hasFile = false;
 var parsingCode = false;
 var writeStream;
 var lineNumber = 0;
-var linkMatcher = new RegExp("^\\[.*\\]\\(.*\\)$");
+var linkMatcher = new RegExp("(<!--didact.*)");
 var codeDelimiterMatcher = new RegExp("^```");
 lineReader.on('line', function (line) {
     lineNumber++;
+    console.log(line);
     //When testing, my match didn't work if I pegged it to the begging of line
     if (!hasFile && linkMatcher.test(line)) {
-         console.log("Link detected. Line Number: " + lineNumber + " Line: " + line);
+         //console.log("Link detected. Line Number: " + lineNumber + " Line: " + line);
         //Assume any link right before a code block is a relative path
         hasFile = true;
-        //Hack the link out of the markdown. Could be more elegant with a regex probablly. Eh
-        var tempArray = line.split("(");
-        filePath = tempArray[tempArray.length - 1];
-        filePath = filePath.slice(0, filePath.length - 1);
+        //Hack the name out of the markdown. Could be more elegant with a regex probablly. Eh
+        //var tempArray = line.split("(");
+        //filePath = tempArray[tempArray.length - 1];
+        filePath=ExtractValue(line,"Name"); // Get the "Name" key value
+        
+        //filePath = filePath.slice(0, filePath.length - 1);
+        //console.log(filePath);
     } else if (hasFile && !parsingCode) {
         //Check if we have a code block right after the link
         if (codeDelimiterMatcher.test(line)) {
-            console.log("Code block matched after link detection. Line Number: " + lineNumber);
+            //console.log("Code block matched after link detection. Line Number: " + lineNumber);
             //We did start a code block,
             mkdirp.sync(process.cwd() +'/'+ path.dirname(filePath));
             writeStream = fs.createWriteStream(process.cwd() +'/'+ filePath);
             parsingCode = true;
         } else {
-            console.log("No code block detected after link detection. Line Number: " + lineNumber);
+            //console.log("No code block detected after link detection. Line Number: " + lineNumber);
             //There was no code block right after the link, we don't do anything
             //Start looking for a link again
             hasFile = false;
         }
     } else if (parsingCode && codeDelimiterMatcher.test(line)) {
-        console.log("Code block terminated. Line Number: " + lineNumber);
+        //console.log("Code block terminated. Line Number: " + lineNumber);
         //we've hit the end of the code block
+        
+fetch('test.txt')
+  .then(response => response.text())
+  .then(text => console.log(text))
+
+        //text = fs.readFileSync("./test.txt", "utf-8");
+        //console.log(text);
+
+        didacturl = encodeURIComponent(text);
+        console.log("[Do it](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=setup$$" + didacturl + ")")
         //Start looking for a link
         parsingCode = false;
         hasFile = false;
@@ -52,3 +66,10 @@ lineReader.on('line', function (line) {
         writeStream.write(line + "\n");
     }
 });
+
+function ExtractValue(data,key){
+    var rx = new RegExp(key + ":(.*?)\\s+--");
+    var values = rx.exec(data); // or: data.match(rx);
+    return values && values[1];
+};
+
