@@ -1,23 +1,20 @@
 # Test Mark Down
 
-[Test Link!](http://notarealurl.com)
-The above link should not do anything
 
-
-<!--didact-requirementCheck, Name:req-ls.sh -->
-```bash
-ls
-```
-
-
-<!--didact-command, Name:00-start.sh -->
+1. Start your linux tutorial:
+<!--didact-command, Name:00-init.shell -->
 ```bash
 ls -al
 ```
 
-<!--didact-command, Name:01-verify.sh -->
+2. Do more stuff.
+<!--didact-command, Name:01-fancy.shell -->
+```bash
+ls -alR ..
+```
+
+3. Finish by reading more
+<!--didact-command, Name:02-verify.shell -->
 ```bash
 more ../README.md
 ```
-
-end

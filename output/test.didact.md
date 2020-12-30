@@ -1,26 +1,23 @@
 # Test Mark Down
 
-[Test Link!](http://notarealurl.com)
-The above link should not do anything
 
-
-<!--didact-requirementCheck, Name:req-ls.sh -->
-```bash
-ls
-```
-[Do it](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=setup$$ls%0A)
-
-
-<!--didact-command, Name:00-start.sh -->
+1. Start your linux tutorial:
+<!--didact-command, Name:00-init.shell -->
 ```bash
 ls -al
 ```
 [Do it](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=setup$$ls%20-al%0A)
 
-<!--didact-command, Name:01-verify.sh -->
+2. Do more stuff.
+<!--didact-command, Name:01-fancy.shell -->
+```bash
+ls -alR ..
+```
+[Do it](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=setup$$ls%20-alR%20..%0A)
+
+3. Finish by reading more
+<!--didact-command, Name:02-verify.shell -->
 ```bash
 more ../README.md
 ```
 [Do it](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=setup$$more%20..%2FREADME.md%0A)
-
-end
