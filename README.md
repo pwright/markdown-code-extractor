@@ -1,15 +1,28 @@
-# autodidact 
+# autodidact POC
 
 ```
 npm i
-cat test.md | node index.js > test.didact.md
+cd output
+./test.sh
 ```
 
 
 based on: https://github.com/chad-autry/markdown-code-extractor
 
 
-# markdown-code-extractor
+Converts `test.md` into `/output/test.didact.md`:
+
+* comment above a code block determines how the didact url is constructed.
+* each code block is named and a file created with the code
+
+
+Future plans:
+
+* support `$` style - only lines starting with `$` are output, only lines are regarded as output
+* support asciidoc
+* support all didact commands, eg requirmentCheck
+
+# Original readme: markdown-code-extractor
 Extracts code blocks in markdown to the relative path link given right above
 
 
