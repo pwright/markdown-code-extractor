@@ -3,14 +3,21 @@
 [Test Link!](http://notarealurl.com)
 The above link should not do anything
 
-<!--didact-command, Name:test.txt -->
+
+<!--didact-requirementCheck, Name:req-ls.sh -->
+```bash
+ls
+```
+
+
+<!--didact-command, Name:00-start.sh -->
 ```bash
 ls -al
 ```
 
-<!--didact-command, Name:test2.txt -->
+<!--didact-command, Name:01-verify.sh -->
 ```bash
-more README.md
+more ../README.md
 ```
 
 end

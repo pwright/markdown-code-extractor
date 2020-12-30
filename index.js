@@ -29,7 +29,6 @@ lineReader.on('line', function (line) {
         //filePath = tempArray[tempArray.length - 1];
         filePath=ExtractValue(line,"Name"); // Get the "Name" key value
         
-        //filePath = filePath.slice(0, filePath.length - 1);
         //console.log(filePath);
     } else if (hasFile && !parsingCode) {
         //Check if we have a code block right after the link
@@ -49,14 +48,17 @@ lineReader.on('line', function (line) {
         //console.log("Code block terminated. Line Number: " + lineNumber);
         //we've hit the end of the code block
         
-fetch('test.txt')
-  .then(response => response.text())
-  .then(text => console.log(text))
 
-        //text = fs.readFileSync("./test.txt", "utf-8");
-        //console.log(text);
+       
+       try {
+        text = fs.readFileSync(filePath, "utf-8");
+      }
+      catch(err) {
+        text = 'initialized, run script again'
+      }
 
-        didacturl = encodeURIComponent(text);
+
+        var didacturl = encodeURIComponent(text);
         console.log("[Do it](didact://?commandId=vscode.didact.sendNamedTerminalAString&text=setup$$" + didacturl + ")")
         //Start looking for a link
         parsingCode = false;

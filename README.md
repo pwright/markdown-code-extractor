@@ -1,8 +1,17 @@
+# autodidact 
+
+```
+npm i
+cat test.md | node index.js > test.didact.md
+```
+
+
+based on: https://github.com/chad-autry/markdown-code-extractor
+
+
 # markdown-code-extractor
 Extracts code blocks in markdown to the relative path link given right above
 
-### Status
-[![Build Status](https://travis-ci.org/chad-autry/markdown-code-extractor.svg?branch=master)](https://travis-ci.org/chad-autry/markdown-code-extractor)
 
 ### Purpose
 While developing copy pasteable systemd and fleet units inline in a markdown file with descriptions, I thought it'd be handy to have them each in their own file as well.
